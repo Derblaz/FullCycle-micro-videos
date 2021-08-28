@@ -10,7 +10,7 @@ class GenreController extends Controller
 {
 
     private $rules = [
-        'name' => 'required|max:225',
+        'name' => 'required|max:255',
         'is_active' => 'boolean'
     ];
 
@@ -23,7 +23,9 @@ class GenreController extends Controller
     public function store(Request $request)
     {
         $this->validate($request, $this->rules);
-        return Genre::create($request->all());
+        $genre = Genre::create($request->all());
+        $genre->refresh();
+        return $genre;
     }
 
 
