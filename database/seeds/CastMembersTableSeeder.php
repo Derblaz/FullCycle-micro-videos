@@ -11,6 +11,6 @@ class CastMembersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(\App\Models\CastMembers::class, 100)->create();
+        factory(\App\Models\CastMember::class, 100)->create();
     }
 }

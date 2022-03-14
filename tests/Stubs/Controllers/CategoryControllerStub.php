@@ -3,7 +3,7 @@
 namespace Tests\Stubs\Controllers;
 
 use App\Http\Controllers\Api\BasicCrudController;
-use Tests\Stubs\Model\CategoryStub;
+use Tests\Stubs\Models\CategoryStub;
 
 class CategoryControllerStub extends BasicCrudController
 {

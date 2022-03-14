@@ -10,7 +10,7 @@ use Mockery;
 use ReflectionClass;
 use Tests\Stubs\Controllers\CategoryControllerStub;
 use Tests\TestCase;
-use Tests\Stubs\Model\CategoryStub;
+use Tests\Stubs\Models\CategoryStub;
 
 class BasicCrudControllerTest extends TestCase
 {

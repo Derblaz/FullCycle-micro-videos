@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Stubs\Model;
+namespace Tests\Stubs\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Schema\Blueprint;
