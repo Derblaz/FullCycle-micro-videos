@@ -4,21 +4,23 @@
 namespace Tests\Feature\Http\Controllers\Api\VideoController;
 
 
-use App\Http\Controllers\Api\VideoController;
-use App\Models\Category;
+use Tests\TestCase;
 use App\Models\Genre;
 use App\Models\Video;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
-use Illuminate\Http\Request;
-use Illuminate\Http\UploadedFile;
-use Illuminate\Support\Collection;
+use App\Models\Category;
 use Illuminate\Support\Arr;
-use Tests\Exceptions\TestException;
-use Tests\TestCase;
 use Tests\Traits\TestSaves;
+use Illuminate\Http\Request;
 use Tests\Traits\TestUploads;
+use Illuminate\Http\UploadedFile;
 use Tests\Traits\TestValidations;
+use Illuminate\Support\Collection;
+use Tests\Exceptions\TestException;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Controllers\Api\VideoController;
 use Illuminate\Foundation\Testing\TestResponse;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Tests\Feature\Http\Controllers\Api\VideoController\BaseVideoControllerTestCase;
 
 class VideoControllerUploadTest extends BaseVideoControllerTestCase
 {
@@ -131,7 +133,7 @@ class VideoControllerUploadTest extends BaseVideoControllerTestCase
             Arr::except($files, ['thumb_file', 'video_file']) + $newFiles
         );
 
-        $id = $response->json('id');
+        $id = $response->json('data.id');
         $video = Video::find($id);
         \Storage::assertMissing($video->relativeFilePath($files['thumb_file']->hashName()));
         \Storage::assertMissing($video->relativeFilePath($files['video_file']->hashName()));
@@ -139,7 +141,7 @@ class VideoControllerUploadTest extends BaseVideoControllerTestCase
 
     protected function assertFilesOnPersist(TestResponse $response, $files)
     {
-        $id = $response->json('id');
+        $id = $response->json('id') ?? $response->json('data.id');
         $video = Video::find($id);
         $this->assertFilesExistsInStorage($video, $files);
     }
